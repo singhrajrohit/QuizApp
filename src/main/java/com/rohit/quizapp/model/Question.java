@@ -1,4 +1,4 @@
-package com.rohit.quizapp;
+package com.rohit.quizapp.model;
 
 import jakarta.persistence.Entity;
 //import jakarta.annotation.Generated;

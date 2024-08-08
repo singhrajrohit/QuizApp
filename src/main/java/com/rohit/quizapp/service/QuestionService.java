@@ -10,8 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.rohit.quizapp.Question;
 import com.rohit.quizapp.dao.QuestionDao;
+import com.rohit.quizapp.model.Question;
 
 @Service
 public class QuestionService {
@@ -71,6 +71,7 @@ public class QuestionService {
                 existingQuestion.setOption4(updatedQuestion.getOption4());
                 existingQuestion.setRightAnswer(updatedQuestion.getRightAnswer());
                 questionDao.save(existingQuestion);
+                
                 return new ResponseEntity<>("Updated Successfully",HttpStatus.ACCEPTED);
             }
             else{
