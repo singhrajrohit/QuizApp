@@ -14,6 +14,7 @@ import com.rohit.quizapp.dao.QuizDao;
 import com.rohit.quizapp.model.Question;
 import com.rohit.quizapp.model.QuestionWrapper;
 import com.rohit.quizapp.model.Quiz;
+import com.rohit.quizapp.model.Response;
 
 @Service
 public class QuizService {
@@ -38,8 +39,7 @@ public class QuizService {
     public ResponseEntity<List<QuestionWrapper>> getQuizQuestion(Integer id) {
         try{
             Optional<Quiz> quiz=quizDao.findById(id);
-
-            if(!quiz.isPresent()){
+             if(!quiz.isPresent()){
                 return new ResponseEntity<>(new ArrayList<>(),HttpStatus.NOT_FOUND);
             }
 
@@ -57,6 +57,30 @@ public class QuizService {
             e.printStackTrace();
             return new ResponseEntity<>(new ArrayList<>(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+    public ResponseEntity<Integer> calculateScore(Integer id, List<Response> responses) {
+        try{
+            Optional<Quiz> quiz=quizDao.findById(id);
+            //Quiz quiz=quizDao.findById(id).get();
+            //if (quiz.isPresent()){
+            //     List<Question> questions = quiz.getQuestions();
+            // }
+            List<Question> questions = quiz.get().getQuestions();
+
+            int right=0;
+            int i=0;
+            for(Response response:responses){
+                if(/*i <questions.size() &&*/response.getResponse().equals(questions.get(i).getRightAnswer())){
+                    right++;
+                }
+                i++;
+            }
+            return new ResponseEntity<>(right,HttpStatus.OK);
+        }catch(Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(-1,HttpStatus.NOT_FOUND);
+        }
+
     }
 
 
