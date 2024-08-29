@@ -17,6 +17,7 @@ import com.rohit.quizapp.model.Question;
 public class QuestionService {
     @Autowired
     QuestionDao questionDao;
+    //get all questions
     public ResponseEntity<List<Question>> getAllQuestions() {
         try{
             return new ResponseEntity<>(questionDao.findAll(),HttpStatus.OK);
@@ -25,6 +26,7 @@ public class QuestionService {
         }
         return new ResponseEntity<>(new ArrayList<>(),HttpStatus.BAD_REQUEST);
     }
+    //Get Questions By Category
     public ResponseEntity<List<Question>> getQuestionsByCattegory(String category) {
         try{
             return new ResponseEntity<>(questionDao.findByCategory(category),HttpStatus.OK);
@@ -33,6 +35,8 @@ public class QuestionService {
         }
         return new ResponseEntity<>(new ArrayList<>(),HttpStatus.BAD_REQUEST);
     }
+
+    // ADD QUESTIONS
     public ResponseEntity<String> addQuestions(Question question) {
         try{
             questionDao.save(question);
@@ -42,6 +46,7 @@ public class QuestionService {
         }
         return new ResponseEntity<>("Not able to add question",HttpStatus.BAD_REQUEST);
     }
+    // DELETE QUESTIONS
     public ResponseEntity<String> deleteQuestion(Integer Id) {
         try{
             Optional<Question> question=questionDao.findById(Id);
@@ -57,6 +62,7 @@ public class QuestionService {
         }
         return new ResponseEntity<>("An error occured while deleting the question",HttpStatus.INTERNAL_SERVER_ERROR); 
     }
+    //UPDATE QUESTIONS
     public ResponseEntity<String> updateQuestion(Integer Id, Question updatedQuestion) {
         try{
             Optional<Question> question=questionDao.findById(Id);

@@ -23,24 +23,31 @@ import com.rohit.quizapp.service.QuestionService;
 public class QuestionController {
     @Autowired
     QuestionService questionService;
+    //All Questions Controller
     @GetMapping("allQuestions")
     public ResponseEntity<List<Question>> getAllQuestions(){
         return questionService.getAllQuestions();
-        
     }
+    
+    //Get Questions By Category
     @GetMapping("category/{category}")
     public ResponseEntity<List<Question>> getQuestionsByCattegory(@PathVariable String category){
         return questionService.getQuestionsByCattegory(category);
-
     }
+
+    //Add Question
     @PostMapping("add")
     public ResponseEntity<String> addQuestions(@RequestBody Question question){
         return questionService.addQuestions(question);
     }
+
+    //Delete Question
     @DeleteMapping("delete")
     public ResponseEntity<String> deleteQuestion(@RequestParam Integer Id){
         return questionService.deleteQuestion(Id);
     }
+
+    //Update Question
     @PutMapping("update")
     public ResponseEntity<String>updateQuestion(@RequestParam Integer Id, @RequestBody Question question){
         return questionService.updateQuestion(Id, question);

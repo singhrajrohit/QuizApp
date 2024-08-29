@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Categories</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // Event handler for category clicks
+            $('.category-link').on('click', function(e) {
+                e.preventDefault();
+                const category = $(this).data('category');
+                window.location.href = `/view/questions/${encodeURIComponent(category)}`;
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Select a Category</h1>
+    <ul>
+        <li><a href="#" class="category-link" data-category="Java">Java</a></li>
+        <li><a href="#" class="category-link" data-category="Python">Python</a></li>
+        <!-- Add more categories as needed -->
+    </ul>
+</body>
+</html>

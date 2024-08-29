@@ -1,0 +1,70 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>All Questions</title>
+
+</head>
+<body>
+    <h1>Retrieve All Questions</h1>
+    
+    
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All Questions</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $.ajax({
+                url: '/question/allQuestions',
+                method: 'GET',
+                success: function(data) {
+                    let tableBody = $('#questionsTable tbody');
+                    data.forEach(function(question) {
+                        let row = `<tr>
+                            <td>${question.id}</td>
+                            <td>${question.questionTitle}</td>
+                            <td>${question.option1}</td>
+                            <td>${question.option2}</td>
+                            <td>${question.option3}</td>
+                            <td>${question.option4}</td>
+                            <td>${question.rightAnswer}</td>
+                            <td>${question.difficultyLevel}</td>
+                            <td>${question.category}</td>
+                        </tr>`;
+                        tableBody.append(row);
+                    });
+                },
+                error: function(error) {
+                    console.error("There was an error fetching the questions!", error);
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>All Questions</h1>
+    <table border="1" id="questionsTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Question Title</th>
+                <th>Option 1</th>
+                <th>Option 2</th>
+                <th>Option 3</th>
+                <th>Option 4</th>
+                <th>Right Answer</th>
+                <th>Difficulty</th>
+                <th>Category</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rows will be populated by jQuery -->
+        </tbody>
+    </table>
+</body>
+</html>
